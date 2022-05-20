@@ -1,0 +1,89 @@
+<div class="contenedor">
+  <mat-toolbar>
+    <span>Cursos</span>
+    <button
+      type="button"
+      routerLink="/dashboard/crear-curso"
+      mat-raised-button
+      [disabled]="!esAdmin"
+    >
+      Nuevo Curso
+    </button>
+  </mat-toolbar>
+
+  <div *ngIf="loading; else spinner">
+    <table
+      *ngIf="(cursos$ | async)?.length; else none"
+      #tabla
+      mat-table
+      [dataSource]="cursos$ | async"
+      class="mat-elevation-z8"
+    >
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+      </ng-container>
+      <ng-container matColumnDef="descripcion">
+        <th mat-header-cell *matHeaderCellDef>Descripcion</th>
+        <td mat-cell *matCellDef="let element">{{ element.descripcion }}</td>
+      </ng-container>
+      <ng-container matColumnDef="fechaInicio">
+        <th mat-header-cell *matHeaderCellDef>Fecha de Inicio</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.fechaInicio | date }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="duracion">
+        <th mat-header-cell *matHeaderCellDef>Duracion</th>
+        <td mat-cell *matCellDef="let element">{{ element.duracion }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="precio">
+        <th mat-header-cell *matHeaderCellDef>Precio</th>
+        <td mat-cell *matCellDef="let element">$ {{ element.precio }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="botones">
+        <th style="text-align: right" mat-header-cell *matHeaderCellDef>
+          Acciones
+        </th>
+        <td style="text-align: right" mat-cell *matCellDef="let element">
+          <a
+            [ngClass]="{ isDisabled: !esAdmin == true }"
+            routerLink="/dashboard/crear-curso"
+            (click)="editarCurso(element)"
+            class="pointer"
+            style="color: #3079d6de"
+            matTooltip="Editar Curso"
+          >
+            <mat-icon>edit</mat-icon>
+          </a>
+          <a
+            [ngClass]="{ isDisabled: !esAdmin == true }"
+            class="pointer"
+            style="color: #dc492a"
+            matTooltip="Eliminar Curso"
+            (click)="eliminarCurso(element.id)"
+          >
+            <mat-icon>delete</mat-icon>
+          </a>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>
+<ng-template #spinner>
+  <mat-spinner class="spinner"></mat-spinner>
+</ng-template>
+
+<ng-template #none>
+  <div class="cont">
+    <h2 class="none">No se ha cargado ningun curso</h2>
+  </div>
+</ng-template>
+
+<router-outlet></router-outlet>

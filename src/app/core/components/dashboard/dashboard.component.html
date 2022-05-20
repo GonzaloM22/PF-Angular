@@ -1,0 +1,53 @@
+<mat-toolbar class="toolbar" color="basic">
+  <div>
+    <button class="menu" mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+
+  <a mat-button>Universidad Tecnologica Nacional</a>
+
+  <button class="logout" mat-icon-button>
+    <mat-icon class="menu" routerLink="login" matTooltip="Cerrar sesión"
+      >logout</mat-icon
+    >
+  </button>
+</mat-toolbar>
+
+<mat-sidenav-container fxFlexFill>
+  <mat-sidenav #sidenav mode="side" opened="true">
+    <div class="btn">
+      <button routerLink="/dashboard" mat-button color="primary">
+        <img
+          width="21px"
+          height="21px"
+          src="./assets/img/home.png"
+          alt=""
+        />Inicio
+      </button>
+      <button routerLink="/dashboard/alumnos" mat-button color="primary">
+        <img width="25px" height="25px" src="./assets/img/student.png" alt="" />
+        Alumnos
+      </button>
+
+      <button routerLink="/dashboard/cursos" mat-button color="primary">
+        <img width="22px" height="22px" src="./assets/img/homework.png" />
+        Cursos
+      </button>
+      <button routerLink="/dashboard/inscripciones" mat-button color="primary">
+        <img width="22px" height="22px" src="./assets/img/contract.png" />
+        Inscripciones
+      </button>
+      <button
+        *ngIf="esAdmin"
+        routerLink="/dashboard/usuarios"
+        mat-button
+        color="primary"
+      >
+        <img width="22px" height="22px" src="./assets/img/usuario.png" />
+        Usuarios
+      </button>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content> <router-outlet></router-outlet></mat-sidenav-content>
+</mat-sidenav-container>

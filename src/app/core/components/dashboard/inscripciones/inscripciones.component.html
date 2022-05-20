@@ -1,0 +1,69 @@
+<div class="contenedor">
+  <mat-toolbar>
+    <span>Inscripción de Alumnos</span>
+
+    <button routerLink="/dashboard/crear-inscripcion" mat-raised-button>
+      Nueva Inscripción
+    </button>
+  </mat-toolbar>
+
+  <div *ngIf="loading; else spinner">
+    <table
+      *ngIf="(inscripciones$ | async)?.length; else none"
+      #tabla
+      mat-table
+      [dataSource]="inscripciones$ | async"
+      class="mat-elevation-z8"
+    >
+      <ng-container matColumnDef="alumno">
+        <th mat-header-cell *matHeaderCellDef>Alumno</th>
+        <td mat-cell *matCellDef="let element">{{ element.alumno }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="curso">
+        <th mat-header-cell *matHeaderCellDef>Curso</th>
+        <td mat-cell *matCellDef="let element">{{ element.curso }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="botones">
+        <th style="text-align: right" mat-header-cell *matHeaderCellDef>
+          Acciones
+        </th>
+        <td style="text-align: right" mat-cell *matCellDef="let element">
+          <a
+            routerLink="/dashboard/crear-inscripcion"
+            (click)="editarInscripcion(element)"
+            class="pointer"
+            style="color: #3079d6de"
+            matTooltip="Editar inscripcion"
+          >
+            <mat-icon>edit</mat-icon>
+          </a>
+          <a
+            class="pointer"
+            style="color: #dc492a"
+            matTooltip="Eliminar Inscripcion"
+            (click)="eliminarInscripcion(element.id)"
+          >
+            <mat-icon>delete</mat-icon>
+          </a>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>
+
+<ng-template #spinner>
+  <mat-spinner class="spinner"></mat-spinner>
+</ng-template>
+
+<ng-template #none>
+  <div class="cont">
+    <h2 class="none">No se ha cargado ninguna inscripción</h2>
+  </div>
+</ng-template>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,41 @@
+mat-toolbar,
+mat-sidenav {
+  background: #30456b;
+}
+
+.menu {
+  color: #ffffff;
+}
+
+mat-sidenav-container {
+  height: 92%;
+  background: #ececed;
+}
+
+.btn button {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-size: 1rem;
+  padding: 1.3rem;
+  color: #ffffff;
+}
+.btn button:hover {
+  background-color: #ffffff;
+  color: black;
+  transition: 0.5s;
+}
+
+.btn button img {
+  margin-right: 1rem;
+}
+
+a {
+  font-size: 1.1rem;
+  color: #ececed;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,0 +1,44 @@
+<div class="contenedor">
+  <div class="formulario">
+    <h2>{{ titulo }} Inscripción</h2>
+    <form [formGroup]="formInscripcion" (ngSubmit)="agregarInscripcion()">
+      <mat-form-field class="campo" appearance="fill">
+        <mat-label>Alumno</mat-label>
+        <mat-select formControlName="alumno">
+          <mat-option
+            *ngFor="let alumno of alumnos"
+            value="{{ alumno.nombre }}"
+            >{{ alumno.nombre }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="campo" appearance="fill">
+        <mat-label>Curso</mat-label>
+        <mat-select formControlName="curso">
+          <mat-option *ngFor="let curso of cursos" value="{{ curso.nombre }}">{{
+            curso.nombre
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="botones">
+        <button
+          type="button"
+          routerLink="/dashboard/inscripciones"
+          mat-raised-button
+          color="primary"
+        >
+          Volver
+        </button>
+        <button
+          type="submit"
+          [disabled]="formInscripcion.invalid"
+          mat-raised-button
+          color="primary"
+        >
+          {{ boton }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<router-outlet></router-outlet>

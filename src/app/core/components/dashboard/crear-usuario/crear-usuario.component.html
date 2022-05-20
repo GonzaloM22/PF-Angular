@@ -1,0 +1,44 @@
+<div class="contenedor">
+  <div class="formulario">
+    <h2>{{ titulo }} Usuario</h2>
+    <form [formGroup]="formUsuarios" (ngSubmit)="agregarUsuario()">
+      <mat-form-field class="campo" appearance="fill">
+        <mat-label>Nombre de Usuario</mat-label>
+        <input matInput formControlName="nombre" />
+      </mat-form-field>
+
+      <mat-form-field class="campo" appearance="fill">
+        <mat-label>Contraseña</mat-label>
+        <input type="password" matInput formControlName="clave" />
+      </mat-form-field>
+
+      <mat-form-field class="campo" appearance="fill">
+        <mat-label>Rol</mat-label>
+        <mat-select formControlName="esAdmin">
+          <mat-option value="true">Administrador</mat-option>
+          <mat-option value="false">Usuario </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="botones">
+        <button
+          type="button"
+          routerLink="/dashboard/usuarios"
+          mat-raised-button
+          color="primary"
+        >
+          Volver
+        </button>
+        <button
+          type="submit"
+          [disabled]="formUsuarios.invalid"
+          mat-raised-button
+          color="primary"
+        >
+          {{ boton }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<router-outlet></router-outlet>

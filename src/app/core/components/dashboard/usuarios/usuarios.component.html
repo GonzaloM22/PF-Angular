@@ -1,0 +1,77 @@
+<div class="contenedor">
+  <mat-toolbar>
+    <span>Usuarios</span>
+    <button
+      type="button"
+      routerLink="/dashboard/crear-usuario"
+      mat-raised-button
+      [disabled]="!esAdmin"
+    >
+      Nuevo Usuario
+    </button>
+  </mat-toolbar>
+
+  <div *ngIf="loading; else spinner">
+    <table
+      *ngIf="(usuarios$ | async)?.length; else none"
+      #tabla
+      mat-table
+      [dataSource]="usuarios$ | async"
+      class="mat-elevation-z8"
+    >
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+      </ng-container>
+      <ng-container matColumnDef="contraseña">
+        <th mat-header-cell *matHeaderCellDef>Contraseña</th>
+        <td mat-cell *matCellDef="let element">{{ element.clave }}</td>
+      </ng-container>
+      <ng-container matColumnDef="rol">
+        <th mat-header-cell *matHeaderCellDef>Rol</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.esAdmin == "true" ? "Administrador" : "Usuario" }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="botones">
+        <th style="text-align: right" mat-header-cell *matHeaderCellDef>
+          Acciones
+        </th>
+        <td style="text-align: right" mat-cell *matCellDef="let element">
+          <a
+            routerLink="/dashboard/crear-usuario"
+            (click)="editarUsuario(element)"
+            class="pointer"
+            style="color: #3079d6de"
+            matTooltip="Editar Usuario"
+          >
+            <mat-icon>edit</mat-icon>
+          </a>
+          <a
+            class="pointer"
+            style="color: #dc492a"
+            matTooltip="Eliminar Usuario"
+            (click)="eliminarUsuario(element.id)"
+          >
+            <mat-icon>delete</mat-icon>
+          </a>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>
+<ng-template #spinner>
+  <mat-spinner class="spinner"></mat-spinner>
+</ng-template>
+
+<ng-template #none>
+  <div class="cont">
+    <h2 class="none">No se ha cargado ningun usuario</h2>
+  </div>
+</ng-template>
+
+<router-outlet></router-outlet>

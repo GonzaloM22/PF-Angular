@@ -1,0 +1,93 @@
+<mat-card class="example-card container">
+  <mat-card-title style="color: #3f51b5">{{ titulo }} Alumno</mat-card-title>
+  <mat-card-subtitle>Complete los datos</mat-card-subtitle>
+
+  <mat-card-content>
+    <form
+      class="container"
+      [formGroup]="formAlumnos"
+      (ngSubmit)="guardarAlumno()"
+    >
+      <div class="f">
+        <mat-form-field appearance="fill" class="mat">
+          <mat-label>Nombre y Apellido</mat-label>
+          <input type="text" formControlName="nombre" matInput />
+        </mat-form-field>
+      </div>
+      <span
+        *ngIf=" nombre?.invalid && ( (nombre?.errors?.['minlength'] ) || nombre?.touched)"
+        >El Nombre y Apellido es requerido.</span
+      >
+      <div class="f">
+        <mat-form-field appearance="fill" class="mat">
+          <mat-label>Edad</mat-label>
+          <input type="number" formControlName="edad" matInput />
+        </mat-form-field>
+      </div>
+      <span *ngIf=" edad?.invalid && (edad?.errors?.['min'] || edad?.touched)"
+        >La edad es requerida.</span
+      >
+      <div class="f">
+        <mat-form-field appearance="fill" class="mat">
+          <mat-label>Genero</mat-label>
+          <mat-select formControlName="sexo" disableRipple>
+            <mat-option value="Femenino">Femenino</mat-option>
+            <mat-option value="Masculino">Masculino</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <span *ngIf="sexo?.invalid && sexo?.touched"
+        >El genero es requerido.</span
+      >
+
+      <div class="f">
+        <mat-form-field appearance="fill" class="mat">
+          <mat-label>Legajo</mat-label>
+          <input type="number" formControlName="legajo" matInput />
+        </mat-form-field>
+      </div>
+      <span *ngIf="legajo?.invalid && legajo?.touched"
+        >El Legajo es requerido.</span
+      >
+
+      <div class="f">
+        <mat-form-field appearance="fill" class="mat">
+          <mat-label>Email</mat-label>
+          <input type="email" formControlName="email" matInput required />
+        </mat-form-field>
+      </div>
+      <span
+        *ngIf="promedio?.invalid && (promedio?.errors?.['max'] || promedio?.touched)"
+        >El promedio es requerido y debe ser un numero entre 1 y 10.</span
+      >
+      <div class="f">
+        <mat-form-field appearance="fill" class="mat">
+          <mat-label>Observaciones</mat-label>
+          <textarea
+            formControlName="observaciones"
+            matInput
+            rows="5"
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <div class="botones">
+        <button
+          type="button"
+          routerLink="/dashboard/alumnos"
+          mat-raised-button
+          color="primary"
+        >
+          Volver
+        </button>
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          [disabled]="formAlumnos.invalid"
+        >
+          {{ boton }} Alumno
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

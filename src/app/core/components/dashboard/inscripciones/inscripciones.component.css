@@ -1,0 +1,51 @@
+.contenedor {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin: 0 auto;
+  padding: 5rem;
+}
+
+table {
+  width: 100%;
+  min-width: 376px;
+  margin-top: 10px;
+}
+.pointer {
+  cursor: pointer;
+}
+
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+  min-width: 378px;
+  border-radius: 0.5rem;
+  background-color: #30456b;
+}
+
+.spinner {
+  margin: 10rem auto;
+}
+
+mat-toolbar span {
+  color: #ffff;
+}
+
+button:hover {
+  background-color: #ececed;
+}
+
+.none {
+  color: #b7322c;
+}
+
+.isDisabled {
+  pointer-events: none;
+  cursor: not-allowed;
+  color: rgb(215, 222, 226, 0.7) !important;
+}
+
+.isDisabled:hover {
+  cursor: not-allowed;
+}

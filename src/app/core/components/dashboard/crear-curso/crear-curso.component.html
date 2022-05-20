@@ -1,0 +1,52 @@
+<div class="contenedor">
+  <div class="formulario">
+    <h2>{{ titulo }} Curso</h2>
+    <form [formGroup]="formCursos" (ngSubmit)="agregarCurso()">
+      <mat-form-field class="campo" appearance="fill">
+        <mat-label>Nombre de Curso</mat-label>
+        <input matInput formControlName="nombre" />
+      </mat-form-field>
+
+      <mat-form-field class="campo" appearance="fill">
+        <mat-label>Descripcion</mat-label>
+
+        <textarea formControlName="descripcion" matInput rows="3"></textarea>
+      </mat-form-field>
+
+      <mat-form-field class="campo" appearance="fill">
+        <mat-label>Fecha de Inicio</mat-label>
+        <input type="date" matInput formControlName="fechaInicio" />
+      </mat-form-field>
+
+      <mat-form-field class="campo" appearance="fill">
+        <mat-label>Duracion</mat-label>
+        <input matInput formControlName="duracion" />
+      </mat-form-field>
+
+      <mat-form-field class="campo" appearance="fill">
+        <mat-label>Precio</mat-label>
+        <input type="number" matInput formControlName="precio" />
+      </mat-form-field>
+
+      <div class="botones">
+        <button
+          type="button"
+          routerLink="/dashboard/cursos"
+          mat-raised-button
+          color="primary"
+        >
+          Volver
+        </button>
+        <button
+          type="submit"
+          [disabled]="formCursos.invalid"
+          mat-raised-button
+          color="primary"
+        >
+          {{ boton }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<router-outlet></router-outlet>
